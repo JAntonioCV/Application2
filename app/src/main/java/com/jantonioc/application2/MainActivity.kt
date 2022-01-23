@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
     var error: Int = 0
     val requestCode_intent: Int = 3
     private lateinit var btnTess: Button
+    private lateinit var btnTess2: Button
     private lateinit var txtTexto: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +19,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         btnTess = findViewById(R.id.button)
+        btnTess2 = findViewById(R.id.button2)
         txtTexto = findViewById(R.id.textView)
+
 
         btnTess.setOnClickListener {
             //intento de llamar a la Actividad de la Aplicación1
@@ -32,8 +35,24 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "¡Error de permiso no declarado!", Toast.LENGTH_SHORT).show()
                 error = 1
             }
-
         }
+
+        btnTess2.setOnClickListener {
+            //intento de llamar a la Actividad de la Aplicación1
+            val intent = Intent()
+            intent.action = "com.jantonioc.application2"
+            intent.addCategory("android.intent.category.DEFAULT")
+            try {
+                startActivityForResult(intent, requestCode_intent)
+            } catch (e: Exception) {
+                txtTexto.append("\n" + e.message + "\n")
+                Toast.makeText(this, "¡Error de permiso no declarado!", Toast.LENGTH_SHORT).show()
+                error = 1
+            }
+        }
+
+
+
     }
 
 }
